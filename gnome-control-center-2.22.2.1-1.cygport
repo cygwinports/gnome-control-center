@@ -1,0 +1,12 @@
+inherit gnome2
+
+DESCRIPTION="GNOME Desktop preferences managers"
+
+CYGCONF_ARGS="
+	--disable-aboutme
+	--disable-alsa
+	--disable-esd
+	--disable-hal
+	--disable-update-mimedb
+	--enable-gstreamer=0.10
+"
