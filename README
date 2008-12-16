@@ -3,55 +3,52 @@ gnome-control-center
 GNOME Desktop preferences managers.
 
 Runtime requirements:
-  cygwin-1.5.25-11
-  atk-1.22.0-1
-  GConf2-2.22.1-1
-  gdk-pixbuf2-2.12.9-1
-  glib2-2.16.3-1
-  gnome-menus-2.22.2-1
-  gnome-settings-daemon-2.22.2.1-1
-  gnome-vfs2-2.22.0-1
-  gstreamer010-0.10.19-1
-  gstreamer010-plugins-base-0.10.19-1
-  gtk2-x11-2.12.9-1
-  libX11_6-1.1.3-1
-  libXcursor1-1.1.9-1
-  libXft2-2.1.12-1
-  libXrandr2-1.2.2-1
-  libXss1-1.1.2-1
-  libbonobo2-2.22.0-1
-  libcairo2-1.6.4-1
-  libdbus-glib_1_2-0.74-1
+  cygwin-1.5.25-15
+  gnome-settings-daemon-2.24.1-1
+  gstreamer010-plugins-base-0.10.21-2
+  libatk1.0_0-1.24.0-1
+  libbonobo2_0-2.24.0-1
+  libcairo2-1.8.4-1
+  libcanberra-gtk0-0.10-1
+  libdbus-glib_1_2-0.76-1
   libfontconfig1-2.6.0-1
-  libfreetype26-2.3.5-1
-  libglade2-2.6.2-1
-  libgnome-desktop2-2.22.2-1
-  libgnome2-2.22.0-1
-  libgnomekbd-2.22.0-1
-  libgnomeui2-2.22.1-1
-  libintl8-0.15-1
-  librsvg2-2.22.0-1
-  libxklavier12-3.6-1
-  libxml2-2.6.32-1
-  metacity-2.22.0-1
-  nautilus-2.22.3-1
-  pango-1.20.3-1
+  libgconf2_4-2.24.0-1
+  libgdk_pixbuf2.0_0-2.14.5-1
+  libglade2.0_0-2.6.3-2
+  libglib2.0_0-2.18.3-1
+  libgnome-desktop2_7-2.24.2-1
+  libgnome-menu2-2.24.2-1
+  libgnome2_0-2.24.1-1
+  libgnomekdb3-2.24.0-1
+  libgnomeui2_0-2.24.0-1
+  libgstreamer0.10_0-0.10.21-2
+  libgtk2.0_0-2.14.5-1
+  libintl8-0.17-2
+  libpango1.0_0-1.22.3-1
+  librsvg2_2-2.22.3-1
+  libX11_6-1.1.5-1
+  libXcursor1-1.1.9-2
+  libXft2-2.1.13-1
+  libxklavier12-3.8-1
+  libxml2-2.7.2-1
+  libXss1-1.1.3-1
+  metacity-2.24.0-1
 
 Build requirements:
 (besides corresponding -devel packages)
-  autoconf2.5-2.61-1
-  automake1.10-1.10.1-1
-  binutils-20060817-1
-  cygport-0.3.11-1
+  autoconf2.5-2.63-1
+  automake1.10-1.10.1-2
+  binutils-20080624-2
+  cygport-0.4.3-1
   gawk-3.1.6-1
   gcc-core-3.4.4-3
-  gnome-common-2.20.0-2
-  gnome-doc-utils-0.12.2-1
-  intltool-0.37.1-1
-  libtool-2.2.2-2
+  gnome-common-2.24.0-1
+  gnome-doc-utils-0.14.0-1
+  intltool-0.40.5-1
+  libtool-2.2.6a-1
   make-3.81-1
-  pkg-config-0.21-1
-  rarian-0.8.0-1
+  pkg-config-0.23a-2
+  rarian-0.8.1-1
   sed-4.1.5-2
 
 Canonical homepage:
@@ -63,30 +60,27 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack gnome-control-center-2.22.2.1-1-src.tar.bz2
+  unpack gnome-control-center-2.24.0.1-1-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./gnome-control-center-2.22.2.1-1.cygport all
+  cygport ./gnome-control-center-2.24.0.1-1.cygport all
 
 This will create:
-  /usr/src/gnome-control-center-2.22.2.1-1-src.tar.bz2
-  /usr/src/gnome-control-center-2.22.2.1-1.tar.bz2
+  /usr/src/gnome-control-center-2.24.0.1-1-src.tar.bz2
+  /usr/src/gnome-control-center-2.24.0.1-1.tar.bz2
+  /usr/src/libgnome-window-settings-devel-2.24.0.1-1.tar.bz2
+  /usr/src/libgnome-window-settings1-2.24.0.1-1.tar.bz2
 
 -------------------------------------------
 
 Files included in the binary package:
 
   /etc/gconf/schemas/control-center.schemas
-  /etc/gconf/schemas/fontilus.schemas
-  /etc/gconf/schemas/themus.schemas
-  /etc/gnome-vfs-2.0/modules/font-method.conf
-  /etc/gnome-vfs-2.0/modules/theme-method.conf
   /etc/postinstall/gnome-control-center.sh
   /etc/preremove/gnome-control-center.sh
   /etc/xdg/autostart/gnome-at-session.desktop
   /etc/xdg/menus/gnomecc.menu
-  /usr/bin/cyggnome-window-settings-1.dll
   /usr/bin/gnome-appearance-properties.exe
   /usr/bin/gnome-at-mobility
   /usr/bin/gnome-at-properties.exe
@@ -94,37 +88,19 @@ Files included in the binary package:
   /usr/bin/gnome-control-center.exe
   /usr/bin/gnome-default-applications-properties.exe
   /usr/bin/gnome-display-properties.exe
-  /usr/bin/gnome-font-viewer.exe
   /usr/bin/gnome-keybinding-properties.exe
   /usr/bin/gnome-keyboard-properties.exe
   /usr/bin/gnome-mouse-properties.exe
   /usr/bin/gnome-network-preferences.exe
   /usr/bin/gnome-sound-properties.exe
-  /usr/bin/gnome-theme-thumbnailer.exe
-  /usr/bin/gnome-thumbnail-font.exe
   /usr/bin/gnome-typing-monitor.exe
   /usr/bin/gnome-window-properties.exe
-  /usr/bin/themus-theme-applier.exe
-  /usr/include/gnome-window-settings-2.0/gnome-window-manager.h
-  /usr/include/gnome-window-settings-2.0/gnome-wm-manager.h
-  /usr/lib/gnome-vfs-2.0/modules/cygfont-method.dll
-  /usr/lib/gnome-vfs-2.0/modules/cygtheme-method.dll
-  /usr/lib/gnome-vfs-2.0/modules/libfont-method.la
-  /usr/lib/gnome-vfs-2.0/modules/libtheme-method.la
-  /usr/lib/libgnome-window-settings.dll.a
-  /usr/lib/libgnome-window-settings.la
-  /usr/lib/nautilus/extensions-2.0/cygnautilus-fontilus.dll
-  /usr/lib/nautilus/extensions-2.0/cygnautilus-themus.dll
-  /usr/lib/nautilus/extensions-2.0/libnautilus-fontilus.la
-  /usr/lib/nautilus/extensions-2.0/libnautilus-themus.la
-  /usr/lib/pkgconfig/gnome-window-settings-2.0.pc
   /usr/lib/window-manager-settings/cygmetacity.dll
   /usr/lib/window-manager-settings/libmetacity.la
   /usr/share/applications/at-properties.desktop
   /usr/share/applications/default-applications.desktop
   /usr/share/applications/display-properties.desktop
   /usr/share/applications/gnome-appearance-properties.desktop
-  /usr/share/applications/gnome-font-viewer.desktop
   /usr/share/applications/gnome-network-preferences.desktop
   /usr/share/applications/gnome-settings-mouse.desktop
   /usr/share/applications/gnome-settings-sound.desktop
@@ -132,23 +108,20 @@ Files included in the binary package:
   /usr/share/applications/gnomecc.desktop
   /usr/share/applications/keybinding.desktop
   /usr/share/applications/keyboard.desktop
-  /usr/share/applications/mimeinfo.cache
-  /usr/share/applications/themus-theme-applier.desktop
   /usr/share/applications/window-properties.desktop
-  /usr/share/desktop-directories/font-method.directory
   /usr/share/desktop-directories/gnomecc.directory
-  /usr/share/desktop-directories/theme-method.directory
-  /usr/share/doc/gnome-control-center-2.22.2.1/AUTHORS
-  /usr/share/doc/gnome-control-center-2.22.2.1/COPYING
-  /usr/share/doc/gnome-control-center-2.22.2.1/ChangeLog
-  /usr/share/doc/gnome-control-center-2.22.2.1/INSTALL
-  /usr/share/doc/gnome-control-center-2.22.2.1/MAINTAINERS
-  /usr/share/doc/gnome-control-center-2.22.2.1/NEWS
-  /usr/share/doc/gnome-control-center-2.22.2.1/README
-  /usr/share/doc/gnome-control-center-2.22.2.1/TODO
+  /usr/share/doc/gnome-control-center-2.24.0.1/AUTHORS
+  /usr/share/doc/gnome-control-center-2.24.0.1/COPYING
+  /usr/share/doc/gnome-control-center-2.24.0.1/ChangeLog
+  /usr/share/doc/gnome-control-center-2.24.0.1/INSTALL
+  /usr/share/doc/gnome-control-center-2.24.0.1/MAINTAINERS
+  /usr/share/doc/gnome-control-center-2.24.0.1/NEWS
+  /usr/share/doc/gnome-control-center-2.24.0.1/README
+  /usr/share/doc/gnome-control-center-2.24.0.1/TODO
+  /usr/share/gnome-control-center/default-apps/gnome-default-applications.xml
   /usr/share/gnome-control-center/glade/appearance.glade
-  /usr/share/gnome-control-center/glade/apply-font.glade
   /usr/share/gnome-control-center/glade/at-enable-dialog.glade
+  /usr/share/gnome-control-center/glade/display-capplet.glade
   /usr/share/gnome-control-center/glade/gnome-default-applications-properties.glade
   /usr/share/gnome-control-center/glade/gnome-keybinding-properties.glade
   /usr/share/gnome-control-center/glade/gnome-keyboard-properties.glade
@@ -156,7 +129,6 @@ Files included in the binary package:
   /usr/share/gnome-control-center/glade/gnome-network-preferences.glade
   /usr/share/gnome-control-center/glade/gnome-window-properties.glade
   /usr/share/gnome-control-center/glade/sound-properties.glade
-  /usr/share/gnome-control-center/gnome-default-applications.xml
   /usr/share/gnome-control-center/keybindings/00-multimedia-key.xml
   /usr/share/gnome-control-center/keybindings/01-desktop-key.xml
   /usr/share/gnome-control-center/pixmaps/at-startup.png
@@ -180,7 +152,6 @@ Files included in the binary package:
   /usr/share/gnome-control-center/pixmaps/subpixel-vbgr.png
   /usr/share/gnome-control-center/pixmaps/subpixel-vrgb.png
   /usr/share/gnome-control-center/pixmaps/theme-thumbnailing.png
-  /usr/share/gnome-control-center/pixmaps/visual-bell.png
   /usr/share/gnome-control-center/pixmaps/window-theme-thumbnailing.png
   /usr/share/gnome/cursor-fonts/cursor-large-white.pcf
   /usr/share/gnome/cursor-fonts/cursor-large.pcf
@@ -218,17 +189,22 @@ Files included in the binary package:
   /usr/share/gnome/help/control-center/zh_CN/control-center.xml
   /usr/share/icons/hicolor/16x16/apps/gnome-display-properties.png
   /usr/share/icons/hicolor/16x16/apps/gnome-network-preferences.png
+  /usr/share/icons/hicolor/16x16/apps/gnome-settings-default-applications.png
   /usr/share/icons/hicolor/16x16/apps/gnome-sound-properties.png
   /usr/share/icons/hicolor/22x22/apps/gnome-display-properties.png
   /usr/share/icons/hicolor/22x22/apps/gnome-network-preferences.png
+  /usr/share/icons/hicolor/22x22/apps/gnome-settings-default-applications.png
   /usr/share/icons/hicolor/22x22/apps/gnome-sound-properties.png
   /usr/share/icons/hicolor/24x24/apps/gnome-display-properties.png
   /usr/share/icons/hicolor/24x24/apps/gnome-network-preferences.png
+  /usr/share/icons/hicolor/24x24/apps/gnome-settings-default-applications.png
   /usr/share/icons/hicolor/24x24/apps/gnome-sound-properties.png
   /usr/share/icons/hicolor/32x32/apps/gnome-display-properties.png
   /usr/share/icons/hicolor/32x32/apps/gnome-network-preferences.png
+  /usr/share/icons/hicolor/32x32/apps/gnome-settings-default-applications.png
   /usr/share/icons/hicolor/32x32/apps/gnome-sound-properties.png
   /usr/share/icons/hicolor/48x48/apps/gnome-network-preferences.png
+  /usr/share/icons/hicolor/48x48/apps/gnome-settings-default-applications.png
   /usr/share/icons/hicolor/48x48/apps/gnome-sound-properties.png
   /usr/share/icons/hicolor/48x48/apps/typing-monitor.png
   /usr/share/icons/hicolor/scalable/apps/gnome-display-properties.svg
@@ -304,7 +280,7 @@ Files included in the binary package:
   /usr/share/locale/sl/LC_MESSAGES/gnome-control-center-2.0.mo
   /usr/share/locale/sq/LC_MESSAGES/gnome-control-center-2.0.mo
   /usr/share/locale/sr/LC_MESSAGES/gnome-control-center-2.0.mo
-  /usr/share/locale/sr@Latn/LC_MESSAGES/gnome-control-center-2.0.mo
+  /usr/share/locale/sr@latin/LC_MESSAGES/gnome-control-center-2.0.mo
   /usr/share/locale/sv/LC_MESSAGES/gnome-control-center-2.0.mo
   /usr/share/locale/ta/LC_MESSAGES/gnome-control-center-2.0.mo
   /usr/share/locale/te/LC_MESSAGES/gnome-control-center-2.0.mo
@@ -336,11 +312,25 @@ Files included in the binary package:
   /usr/share/omf/control-center/control-center-uk.omf
   /usr/share/omf/control-center/control-center-vi.omf
   /usr/share/omf/control-center/control-center-zh_CN.omf
+  /usr/share/pkgconfig/gnome-default-applications.pc
   /usr/share/pkgconfig/gnome-keybindings.pc
+
+(libgnome-window-settings1)
+  /usr/bin/cyggnome-window-settings-1.dll
+
+(libgnome-window-settings-devel)
+  /usr/include/gnome-window-settings-2.0/gnome-window-manager.h
+  /usr/include/gnome-window-settings-2.0/gnome-wm-manager.h
+  /usr/lib/libgnome-window-settings.dll.a
+  /usr/lib/libgnome-window-settings.la
+  /usr/lib/pkgconfig/gnome-window-settings-2.0.pc
 
 ------------------
 
 Port Notes:
+
+----- version 2.24.0.1-1 -----
+Version bump for GNOME 2.24.
 
 ----- version 2.22.2.1-1 -----
 Version bump for GNOME 2.22.

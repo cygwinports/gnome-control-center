@@ -1,4 +1,0 @@
-category: Gnome
-requires: cygwin GConf2 atk glib2 gnome-menus gnome-settings-daemon gnome-vfs2 gstreamer010 gstreamer010-plugins-base gtk2-x11 libX11_6 libXcursor1 libXft2 libXrandr2 libXss1 libbonobo2 libcairo2 libdbus-glib_1_2 libfontconfig1 libfreetype26 libglade2 libgnome-desktop2 libgnome2 libgnomekbd libgnomeui2 libintl8 librsvg2 libxklavier12 libxml2 metacity nautilus pango
-sdesc: "GNOME Desktop preferences managers"
-ldesc: "GNOME Desktop preferences managers"

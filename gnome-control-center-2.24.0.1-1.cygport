@@ -1,0 +1,19 @@
+inherit gnome2
+
+DESCRIPTION="GNOME Desktop preferences managers"
+
+PATCH_URI="2.24-no-undefined.patch"
+
+PKG_NAMES="${PN} libgnome-window-settings1 libgnome-window-settings-devel"
+gnome_control_center_CONTENTS="etc/ usr/bin/gnome-* usr/lib/window-manager-settings/ usr/share/"
+libgnome_window_settings1_CONTENTS="usr/bin/*-1.dll"
+libgnome_window_settings_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
+
+CYGCONF_ARGS="
+	--disable-aboutme
+	--disable-alsa
+	--disable-esd
+	--disable-hal
+	--disable-update-mimedb
+	--enable-gstreamer=0.10
+"
