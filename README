@@ -4,6 +4,8 @@ GNOME Desktop preferences managers.
 
 Runtime requirements:
   cygwin-1.7.0-45
+  bash
+  GConf2
   gnome-settings-daemon-2.26.0-1
   libatk1.0_0-1.26.0-1
   libbonobo2_0-2.24.1-1
@@ -15,17 +17,17 @@ Runtime requirements:
   libfreetype6-2.3.9-1
   libgcc1-4.3.2-2
   libgconf2_4-2.26.0-1
-  libgdk_pixbuf2.0_0-2.16.0-1
+  libgdk_pixbuf2.0_0-2.16.1-1
   libglade2.0_0-2.6.4-1
-  libglib2.0_0-2.20.0-1
+  libglib2.0_0-2.20.1-1
   libgnome-desktop2_11-2.26.0-1
   libgnome-menu2-2.26.0-1
   libgnome2_0-2.26.0-1
   libgnomekbd3-2.26.0-1
   libgnomeui2_0-2.24.1-1
-  libgtk2.0_0-2.16.0-1
+  libgtk2.0_0-2.16.1-1
   libintl8-0.17-10
-  libpango1.0_0-1.24.0-1
+  libpango1.0_0-1.24.1-1
   librsvg2_2-2.26.0-1
   libX11_6-1.2-10
   libXcursor1-1.1.9-10
@@ -334,6 +336,9 @@ Files included in the binary package:
 ------------------
 
 Port Notes:
+
+----- version 2.26.0-2 -----
+Fixed incorrect reporting of missing theme engines in Appearance capplet.
 
 ----- version 2.26.0-1 -----
 Initial release of GNOME 2.26 for Cygwin 1.7.
