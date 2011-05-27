@@ -1,0 +1,11 @@
+--- origsrc/gnome-control-center-3.0.1.1/libgnome-control-center/Makefile.am	2011-02-23 17:39:22.000000000 -0600
++++ src/gnome-control-center-3.0.1.1/libgnome-control-center/Makefile.am	2011-05-18 02:14:48.962412800 -0500
+@@ -32,7 +32,7 @@ libgnome_control_center_la_SOURCES =		\
+ 	$(NULL)
+ 
+ libgnome_control_center_la_LDFLAGS =		\
+-	no-undefined				\
++	-no-undefined				\
+ 	-version-info $(LIBGNOMECONTROLCENTER_CURRENT):$(LIBGNOMECONTROLCENTER_REVISION):$(LIBGNOMECONTROLCENTER_AGE) \
+ 	$(NULL)
+ 

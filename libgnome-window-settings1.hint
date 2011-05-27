@@ -1,5 +1,0 @@
-category: Gnome
-requires: libglib2.0_0 libgnome-desktop2_17 libgtk2.0_0 libintl8
-external-source: gnome-control-center
-sdesc: "GNOME window manager settings library (runtime)"
-ldesc: "GNOME Desktop preferences managers"

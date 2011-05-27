@@ -1,4 +1,0 @@
-category: Gnome
-requires: bash GConf2 gnome-settings-daemon libcairo2 libcanberra-gtk0 libcanberra0 libdbus-glib_1_2 libfontconfig1 libfreetype6 libgconf2_4 libgdk_pixbuf2.0_0 libglib2.0_0 libgnome-desktop2_17 libgnome-window-settings1 libgnomekbd4 libgtk2.0_0 libintl8 libpango1.0_0 libslab0 libunique1.0_0 libX11_6 libXcursor1 libXft2 libXi6 libxklavier16 libxml2 libXss1 metacity
-sdesc: "GNOME Desktop preferences managers"
-ldesc: "GNOME Desktop preferences managers"

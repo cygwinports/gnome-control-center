@@ -1,0 +1,11 @@
+--- origsrc/gnome-control-center-3.0.1.1/panels/datetime/Makefile.am	2011-03-15 12:02:09.000000000 -0500
++++ src/gnome-control-center-3.0.1.1/panels/datetime/Makefile.am	2011-05-23 17:56:15.614309600 -0500
+@@ -90,7 +90,7 @@ test_endianess_CFLAGS = $(DATETIME_PANEL
+ 
+ all-local: check-local
+ 
+-check-local: test-timezone-gfx test-endianess test-timezone
++check-local: $(noinst_PROGRAMS)
+ 	$(builddir)/test-timezone-gfx $(srcdir)/data
+ 	$(builddir)/test-endianess
+ #	$(builddir)/test-timezone

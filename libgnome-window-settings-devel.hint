@@ -1,5 +1,0 @@
-category: Gnome
-requires: libgnome-window-settings1 libglib2.0-devel libgnome-desktop2-devel libgtk2.0-devel gettext
-external-source: gnome-control-center
-sdesc: "GNOME window manager settings library (development)"
-ldesc: "GNOME Desktop preferences managers"
