@@ -5,6 +5,7 @@ DESCRIPTION="GNOME Desktop preferences managers"
 PATCH_URI="
 	3.0.2-cygwin.patch
 	3.0.2-exeext.patch
+	3.0.2-localedir.patch
 	3.0.2-no-undefined.patch
 	3.0.2-missing-deps.patch
 "

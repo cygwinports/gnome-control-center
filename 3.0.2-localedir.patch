@@ -1,0 +1,11 @@
+--- origsrc/gnome-control-center-3.0.2/panels/common/Makefile.am	2011-04-12 10:33:56.000000000 -0500
++++ src/gnome-control-center-3.0.2/panels/common/Makefile.am	2011-05-31 23:28:08.626486000 -0500
+@@ -8,7 +8,7 @@ AM_CPPFLAGS =						\
+ 	$(LIBLANGUAGE_CFLAGS)				\
+ 	-DDATADIR=\""$(datadir)"\"			\
+ 	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
+-	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
++	-DLIBLOCALEDIR=\""$(datadir)/locale"\"          \
+ 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
+ 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"
+ 
