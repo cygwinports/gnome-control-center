@@ -1,0 +1,56 @@
+--- origsrc/gnome-control-center-3.0.2/configure.ac	2011-05-31 20:02:47.328359500 -0500
++++ src/gnome-control-center-3.0.2/configure.ac	2011-05-31 19:59:57.000000000 -0500
+@@ -90,32 +90,17 @@ PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_
+ PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
+ PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
+                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+-PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES dbus-glib-1
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+-                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES dbus-glib-1 gnome-desktop-3.0)
+ PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0)
+ PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES gconf-2.0 x11)
+ PKG_CHECK_MODULES(MEDIA_PANEL, $COMMON_MODULES)
+ PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
+                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
+ PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
+-PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1)
+-PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES dbus-glib-1
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES libgnomekbd >= 2.91.91
+                   libxklavier >= 5.1 libgnomekbdui >= 2.91.91)
+ PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
+-PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
+-                  libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION
+-                  libpulse >= $PA_REQUIRED_VERSION
+-                  libpulse-mainloop-glib >= $PA_REQUIRED_VERSION
+-                  gconf-2.0)
+ PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES gconf-2.0)
+-PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+-                  gnome-desktop-3.0
+-                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+ 
+ GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
+ AC_SUBST(GDESKTOP_PREFIX)
+--- origsrc/gnome-control-center-3.0.2/panels/Makefile.am	2011-05-31 20:02:47.335359900 -0500
++++ src/gnome-control-center-3.0.2/panels/Makefile.am	2011-05-31 19:59:57.000000000 -0500
+@@ -2,17 +2,13 @@ SUBDIRS= \
+ 	common \
+ 	background \
+ 	screen \
+-	power \
+ 	display \
+ 	media \
+ 	mouse \
+ 	region \
+ 	info \
+-	sound \
+ 	keyboard \
+-	universal-access \
+-	user-accounts \
+-	datetime
++	universal-access
+ 
+ if BUILD_PRINTERS
+ SUBDIRS += printers

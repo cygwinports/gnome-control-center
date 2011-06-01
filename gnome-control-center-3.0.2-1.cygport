@@ -6,7 +6,7 @@ PATCH_URI="
 	3.0.2-cygwin.patch
 	3.0.2-exeext.patch
 	3.0.2-no-undefined.patch
-	3.0.2-sound-optional.patch
+	3.0.2-missing-deps.patch
 "
 
 PKG_NAMES="${PN} ${PN}-devel"
