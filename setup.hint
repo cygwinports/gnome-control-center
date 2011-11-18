@@ -1,4 +1,4 @@
 category: Gnome
-requires: GConf2 gnome-settings-daemon libcairo2 libdbus-glib_1_2 libfontconfig1 libgconf2_4 libgdk_pixbuf2.0_0 libglib2.0_0 libgnome-desktop3_0 libgnome-menu2 libgnomekbd7 libgtk3_0 libgtop2.0_7 libintl8 libpango1.0_0 libsocialweb-client2 libX11_6 libXi6 libxklavier16 libxml2
+requires: GConf2 gnome-settings-daemon libcairo2 libcolord1 libdbus-glib_1_2 libfontconfig1 libgcc1 libgconf2_4 libgdk_pixbuf2.0_0 libglib2.0_0 libgnome-desktop3_2 libgnome-menu3_0 libgnomekbd7 libgoa1.0_0 libgtk3_0 libgtop2.0_7 libintl8 libnotify4 libpango1.0_0 libsocialweb-client2 libX11_6 libXi6 libxklavier16 libxml2
 sdesc: "GNOME Desktop preferences manager"
 ldesc: "GNOME Desktop preferences managers"

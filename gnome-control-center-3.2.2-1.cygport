@@ -6,14 +6,12 @@ PATCH_URI="
 	3.0.2-cygwin.patch
 	3.0.2-exeext.patch
 	3.0.2-localedir.patch
-	3.0.2-no-undefined.patch
-	3.0.2-missing-deps.patch
+	3.2.2-polkit.patch
 "
 
 PKG_NAMES="${PN} ${PN}-devel"
 PKG_HINTS="setup devel"
-gnome_control_center_CONTENTS="etc/ usr/bin/ usr/lib/control-center-1/ usr/share/"
-gnome_control_center_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
+gnome_control_center_CONTENTS="etc/ usr/"
 
 CYGCONF_ARGS="--disable-cups --disable-update-mimedb --with-libsocialweb"
 

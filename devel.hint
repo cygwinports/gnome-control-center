@@ -1,5 +1,4 @@
-category: Gnome
-requires: gnome-control-center libgconf2-devel libgdk_pixbuf2.0-devel libglib2.0-devel libgtk3-devel gettext
+category: _obsolete
 external-source: gnome-control-center
-sdesc: "GNOME Desktop preferences manager (plugin development)"
+sdesc: "Obsolete package"
 ldesc: "GNOME Desktop preferences managers"

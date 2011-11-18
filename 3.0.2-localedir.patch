@@ -3,7 +3,7 @@
 @@ -8,7 +8,7 @@ AM_CPPFLAGS =						\
  	$(LIBLANGUAGE_CFLAGS)				\
  	-DDATADIR=\""$(datadir)"\"			\
- 	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
+ 	-DUIDIR=\""$(pkgdatadir)/ui"\"			\
 -	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 +	-DLIBLOCALEDIR=\""$(datadir)/locale"\"          \
  	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
