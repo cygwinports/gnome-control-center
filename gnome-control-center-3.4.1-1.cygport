@@ -6,7 +6,8 @@ PATCH_URI="
 	3.0.2-cygwin.patch
 	3.0.2-exeext.patch
 	3.0.2-localedir.patch
-	3.2.2-polkit.patch
+	3.4.1-polkit.patch
+	3.4.1-no-undefined.patch
 "
 
 PKG_NAMES="${PN} ${PN}-devel"
@@ -15,3 +16,4 @@ gnome_control_center_CONTENTS="etc/ usr/"
 
 CYGCONF_ARGS="--disable-cups --disable-update-mimedb --with-libsocialweb"
 
+KEEP_LA_FILES="none"

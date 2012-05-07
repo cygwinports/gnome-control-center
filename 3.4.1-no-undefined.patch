@@ -1,0 +1,22 @@
+--- origsrc/gnome-control-center-3.4.1/configure.ac	2012-05-07 02:11:15.473032900 -0500
++++ src/gnome-control-center-3.4.1/configure.ac	2012-05-07 02:21:38.087644400 -0500
+@@ -222,6 +222,9 @@ PANEL_LIBS=""
+ AC_SUBST(PANEL_LIBS)
+ 
+ PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
++case "$host_os" in
++  cygwin*)  PANEL_LDFLAGS="$PANEL_LDFLAGS -Wl,\$(top_builddir)/shell/libgnomecc.a" ;;
++esac
+ AC_SUBST(PANEL_LDFLAGS)
+ 
+ dnl ==============================================
+--- origsrc/gnome-control-center-3.4.1/shell/Makefile.am	2012-03-05 08:04:56.000000000 -0600
++++ src/gnome-control-center-3.4.1/shell/Makefile.am	2012-05-07 02:23:55.019476400 -0500
+@@ -41,6 +41,7 @@ gnome_control_center_LDADD =			\
+ 	$(SHELL_LIBS)
+ 
+ gnome_control_center_LDFLAGS = -export-dynamic
++gnome_control_center_LDFLAGS += -Wl,--out-implib,libgnomecc.a
+ 
+ AM_CPPFLAGS =							\
+ 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
