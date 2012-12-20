@@ -1,4 +1,0 @@
-category: Gnome
-requires: crypt gnome-settings-daemon libatk1.0_0 libcairo2 libcanberra0 libcanberra-gtk3_0 libcolord1 libfontconfig1 libgcc1 libgdk_pixbuf2.0_0 libglib2.0_0 libgnome-desktop3_2 libgnome-menu3_0 libgnomekbd7 libgoa1.0_0 libgtk3_0 libgtop2.0_7 libintl8 libnotify4 libpango1.0_0 libpulse0 libpulse-mainloop-glib0 libsocialweb-client2 libX11_6 libXi6 libxklavier16 libxml2
-sdesc: "GNOME Desktop preferences manager"
-ldesc: "GNOME Desktop preferences managers"

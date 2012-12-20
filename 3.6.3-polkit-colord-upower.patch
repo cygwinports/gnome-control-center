@@ -1,0 +1,65 @@
+--- origsrc/gnome-control-center-3.6.3/configure.ac	2012-12-19 17:18:31.939086500 -0600
++++ src/gnome-control-center-3.6.3/configure.ac	2012-12-19 17:29:25.916491800 -0600
+@@ -125,11 +125,9 @@ PKG_CHECK_MODULES(BACKGROUND_PANEL, $COM
+                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
+                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES gnome-desktop-3.0 >= 3.1.0)
+-PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0
+-		  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
++PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0)
+ PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES
+                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
+                   x11)
+@@ -138,13 +136,7 @@ PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_M
+                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
+ PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
+ PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0 >= $GOA_REQUIRED_VERSION)
+-PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1
+-                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
+-PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES colord >= 0.1.8)
+-PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
+                   $IBUS_MODULE)
+ PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
+@@ -153,12 +145,6 @@ PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_M
+                   libpulse >= $PA_REQUIRED_VERSION
+                   libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
+ PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES)
+-PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+-                  gnome-desktop-3.0
+-                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
+-                  pwquality
+-                  $SYSTEMD)
+ 
+ GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
+ AC_SUBST(GDESKTOP_PREFIX)
+--- origsrc/gnome-control-center-3.6.3/panels/Makefile.am	2012-10-31 09:40:59.000000000 -0500
++++ src/gnome-control-center-3.6.3/panels/Makefile.am	2012-12-19 17:29:35.063015000 -0600
+@@ -2,8 +2,6 @@ SUBDIRS= \
+ 	common \
+ 	background \
+ 	screen \
+-	power \
+-	color \
+ 	display \
+ 	mouse \
+ 	online-accounts \
+@@ -12,7 +10,6 @@ SUBDIRS= \
+ 	sound \
+ 	keyboard \
+ 	universal-access \
+-	user-accounts \
+ 	datetime
+ 
+ if BUILD_WACOM
+--- origsrc/gnome-control-center-3.6.3/polkit/polkit.h	1969-12-31 18:00:00.000000000 -0600
++++ src/gnome-control-center-3.6.3/polkit/polkit.h	2012-12-19 17:26:35.008716500 -0600
+@@ -0,0 +1 @@
++#define polkit_permission_new_sync(a,b,c,d) NULL
