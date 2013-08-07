@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="gnome-control-center"
-VERSION=3.6.3
+VERSION=3.8.4.1
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME Desktop preferences manager"
@@ -10,10 +10,9 @@ REQUIRES="gnome-settings-daemon"
 
 PATCH_URI="
 	3.0.2-cygwin.patch
-	3.0.2-exeext.patch
-	3.0.2-localedir.patch
-	3.6.3-polkit-colord-upower.patch
-	3.4.1-no-undefined.patch
+	3.8-exeext.patch
+	3.8-polkit-etc.patch
 "
 
-CYGCONF_ARGS="--disable-cups --disable-update-mimedb --with-libsocialweb"
+ACLOCAL_FLAGS="-I libgd"
+CYGCONF_ARGS="--disable-cups --disable-update-mimedb"
