@@ -1,0 +1,21 @@
+--- origsrc/gnome-control-center-3.8.6/panels/background/Makefile.am	2013-10-31 09:20:57.000000000 -0500
++++ src/gnome-control-center-3.8.6/panels/background/Makefile.am	2013-12-19 23:04:11.800677200 -0600
+@@ -44,7 +44,7 @@ libbackground_la_SOURCES =		\
+ 	cc-background-panel.c		\
+ 	cc-background-panel.h
+ 
+-libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS) libbackground-chooser.la
++libbackground_la_LIBADD = libbackground-chooser.la $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
+ 
+ if WITH_LIBSOCIALWEB
+ libbackground_la_SOURCES += bg-flickr-source.c bg-flickr-source.h
+@@ -54,8 +54,7 @@ endif
+ 
+ noinst_PROGRAMS = test-chooser-dialog
+ test_chooser_dialog_SOURCES = test-chooser-dialog.c
+-test_chooser_dialog_LDADD = libbackground-chooser.la
+-test_chooser_dialog_LDFLAGS = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
++test_chooser_dialog_LDADD = libbackground-chooser.la $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
+ 
+ resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/background.gresource.xml)
+ cc-background-resources.c: background.gresource.xml $(resource_files)
