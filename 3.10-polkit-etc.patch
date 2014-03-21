@@ -1,11 +1,11 @@
---- origsrc/gnome-control-center-3.8.4.1/configure.ac	2013-07-25 03:34:34.000000000 -0500
-+++ src/gnome-control-center-3.8.4.1/configure.ac	2013-08-07 15:43:17.716896400 -0500
-@@ -124,17 +124,13 @@ PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_M
+--- origsrc/gnome-control-center-3.10.3/configure.ac	2014-03-03 05:32:52.000000000 -0600
++++ src/gnome-control-center-3.10.3/configure.ac	2014-03-21 01:03:44.160001300 -0500
+@@ -117,17 +117,13 @@ LIBGD_INIT([_view-common notification ma
+ 
+ PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
  PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
- # egg-list-box is a static library, so it must be shared among all panels
- # or it breaks GType registration
--PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 egg-list-box polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
-+PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 egg-list-box)
+-PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
++PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11)
  PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                    gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
  PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
@@ -20,7 +20,7 @@
  PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES
                    gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                    x11)
-@@ -144,19 +141,9 @@ PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_M
+@@ -137,20 +133,9 @@ PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_M
  PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES gmodule-2.0)
  PKG_CHECK_MODULES(NOTIFICATIONS_PANEL, $COMMON_MODULES libgnome-menu-3.0)
  PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0 >= $GOA_REQUIRED_VERSION)
@@ -29,6 +29,7 @@
 -PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES
 -                  colord >= $COLORD_REQUIRED_VERSION
 -                  colord-gtk >= $COLORD_GTK_REQUIRED_VERSION
+-                  libsoup-2.4
 -                  gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 -PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
 -                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
@@ -40,7 +41,7 @@
                    $IBUS_MODULE)
  PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(SEARCH_PANEL, $COMMON_MODULES)
-@@ -165,12 +152,6 @@ PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_M
+@@ -159,12 +144,6 @@ PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_M
                    libpulse >= $PA_REQUIRED_VERSION
                    libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
  PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES)
@@ -48,13 +49,13 @@
 -                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
 -                  gnome-desktop-3.0
 -                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
--                  pwquality
+-                  pwquality >= $PWQUALITY_REQUIRED_VERSION
 -                  accountsservice >= $ACCOUNTSSERVICE_REQUIRED_VERSION)
- PKG_CHECK_MODULES(SHARING_PANEL, $COMMON_MODULES egg-list-box)
+ PKG_CHECK_MODULES(SHARING_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(REMOTE_LOGIN_HELPER, glib-2.0 >= $GLIB_REQUIRED_VERSION gio-2.0)
  
---- origsrc/gnome-control-center-3.8.4.1/panels/Makefile.am	2013-01-17 04:32:38.000000000 -0600
-+++ src/gnome-control-center-3.8.4.1/panels/Makefile.am	2013-08-07 16:00:11.615888100 -0500
+--- origsrc/gnome-control-center-3.10.3/panels/Makefile.am	2014-03-21 01:04:17.677918400 -0500
++++ src/gnome-control-center-3.10.3/panels/Makefile.am	2014-03-21 01:01:24.000000000 -0500
 @@ -1,9 +1,6 @@
  SUBDIRS= \
  	common \
@@ -73,8 +74,8 @@
  	datetime \
  	search \
  	privacy \
---- origsrc/gnome-control-center-3.8.4.1/panels/region/cc-region-panel.c	2013-07-24 08:22:24.000000000 -0500
-+++ src/gnome-control-center-3.8.4.1/panels/region/cc-region-panel.c	2013-08-07 16:09:40.389420100 -0500
+--- origsrc/gnome-control-center-3.10.3/panels/region/cc-region-panel.c	2014-03-21 01:04:17.683918800 -0500
++++ src/gnome-control-center-3.10.3/panels/region/cc-region-panel.c	2014-03-21 01:01:24.000000000 -0500
 @@ -45,7 +45,9 @@
  #include "cc-ibus-utils.h"
  #endif
@@ -83,11 +84,11 @@
  #include <act/act.h>
 +#endif
  
- #include "egg-list-box/egg-list-box.h"
  #include <libgd/gd-notification.h>
-@@ -96,8 +98,10 @@ struct _CcRegionPanelPrivate {
-         GtkWidget *formats_row;
-         GtkWidget *formats_label;
+ 
+@@ -95,8 +97,10 @@ struct _CcRegionPanelPrivate {
+         GtkListBoxRow *formats_row;
+         GtkWidget     *formats_label;
  
 +#ifndef __CYGWIN__
          ActUserManager *user_manager;
@@ -96,7 +97,7 @@
          GSettings      *locale_settings;
  
          gchar *language;
-@@ -133,6 +137,7 @@ cc_region_panel_finalize (GObject *objec
+@@ -132,6 +136,7 @@ cc_region_panel_finalize (GObject *objec
          g_cancellable_cancel (priv->cancellable);
          g_clear_object (&priv->cancellable);
  
@@ -104,7 +105,7 @@
          if (priv->user_manager) {
                  g_signal_handlers_disconnect_by_data (priv->user_manager, self);
                  priv->user_manager = NULL;
-@@ -142,6 +147,7 @@ cc_region_panel_finalize (GObject *objec
+@@ -141,6 +146,7 @@ cc_region_panel_finalize (GObject *objec
                  g_signal_handlers_disconnect_by_data (priv->user, self);
                  priv->user = NULL;
          }
@@ -112,7 +113,7 @@
  
          g_clear_object (&priv->permission);
          g_clear_object (&priv->localed);
-@@ -381,7 +387,9 @@ update_language (CcRegionPanel *self,
+@@ -383,7 +389,9 @@ update_language (CcRegionPanel *self,
          } else {
                  if (g_strcmp0 (language, priv->language) == 0)
                          return;
@@ -122,7 +123,7 @@
                  if (priv->login_auto_apply)
                          set_system_language (self, language);
                  maybe_notify (self, LC_MESSAGES, language);
-@@ -577,9 +585,11 @@ update_language_from_user (CcRegionPanel
+@@ -580,9 +588,11 @@ update_language_from_user (CcRegionPanel
  	CcRegionPanelPrivate *priv = self->priv;
          const gchar *language;
  
@@ -134,7 +135,7 @@
                  language = "en_US.utf-8";
  
          g_free (priv->language);
-@@ -593,11 +603,13 @@ setup_language_section (CcRegionPanel *s
+@@ -596,11 +606,13 @@ setup_language_section (CcRegionPanel *s
  	CcRegionPanelPrivate *priv = self->priv;
          GtkWidget *widget;
  
@@ -148,7 +149,7 @@
  
          priv->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
          g_signal_connect_swapped (priv->locale_settings, "changed::" KEY_REGION,
-@@ -1670,6 +1682,9 @@ login_changed (CcRegionPanel *self)
+@@ -1676,6 +1688,9 @@ login_changed (CcRegionPanel *self)
  static void
  set_login_button_visibility (CcRegionPanel *self)
  {
@@ -158,7 +159,7 @@
          CcRegionPanelPrivate *priv = self->priv;
          gboolean has_multiple_users;
          gboolean loaded;
-@@ -1684,6 +1699,7 @@ set_login_button_visibility (CcRegionPan
+@@ -1690,6 +1705,7 @@ set_login_button_visibility (CcRegionPan
          gtk_widget_set_visible (priv->login_button, !priv->login_auto_apply);
  
          g_signal_handlers_disconnect_by_func (priv->user_manager, set_login_button_visibility, self);
@@ -166,7 +167,7 @@
  }
  
  static void
-@@ -1713,12 +1729,14 @@ setup_login_button (CcRegionPanel *self)
+@@ -1722,12 +1738,14 @@ setup_login_button (CcRegionPanel *self)
          g_signal_connect_swapped (priv->login_button, "notify::active",
                                    G_CALLBACK (login_changed), self);
  
@@ -181,7 +182,7 @@
  }
  
  static void
-@@ -1762,7 +1780,9 @@ cc_region_panel_init (CcRegionPanel *sel
+@@ -1771,7 +1789,9 @@ cc_region_panel_init (CcRegionPanel *sel
  		return;
  	}
  
@@ -191,13 +192,13 @@
  
          priv->cancellable = g_cancellable_new ();
  
---- origsrc/gnome-control-center-3.8.4.1/polkit/polkit.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/gnome-control-center-3.8.4.1/polkit/polkit.h	2013-08-07 15:44:13.219070900 -0500
+--- origsrc/gnome-control-center-3.10.3/polkit/polkit.h	1969-12-31 18:00:00.000000000 -0600
++++ src/gnome-control-center-3.10.3/polkit/polkit.h	2014-03-21 01:01:24.000000000 -0500
 @@ -0,0 +1 @@
 +#define polkit_permission_new_sync(a,b,c,d) NULL
---- origsrc/gnome-control-center-3.8.4.1/shell/Makefile.am	2013-07-24 08:22:24.000000000 -0500
-+++ src/gnome-control-center-3.8.4.1/shell/Makefile.am	2013-08-07 16:22:13.913519200 -0500
-@@ -51,22 +51,19 @@ gnome_control_center_LDADD =						\
+--- origsrc/gnome-control-center-3.10.3/shell/Makefile.am	2014-03-21 01:04:17.689919100 -0500
++++ src/gnome-control-center-3.10.3/shell/Makefile.am	2014-03-21 01:01:24.000000000 -0500
+@@ -52,22 +52,19 @@ gnome_control_center_LDADD =						\
  	$(top_builddir)/libgd/libgd.la					\
  	$(top_builddir)/panels/common/liblanguage.la			\
  	$(top_builddir)/panels/background/libbackground.la		\
@@ -221,8 +222,8 @@
  
  if BUILD_WACOM
  gnome_control_center_LDADD += $(top_builddir)/panels/wacom/libwacom-properties.la
---- origsrc/gnome-control-center-3.8.4.1/shell/cc-panel-loader.c	2013-07-24 08:22:24.000000000 -0500
-+++ src/gnome-control-center-3.8.4.1/shell/cc-panel-loader.c	2013-08-07 16:29:26.516262600 -0500
+--- origsrc/gnome-control-center-3.10.3/shell/cc-panel-loader.c	2014-03-21 01:04:17.698919600 -0500
++++ src/gnome-control-center-3.10.3/shell/cc-panel-loader.c	2014-03-21 01:01:24.000000000 -0500
 @@ -33,9 +33,13 @@ extern GType cc_background_panel_get_typ
  #ifdef BUILD_BLUETOOTH
  extern GType cc_bluetooth_panel_get_type (void);
