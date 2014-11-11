@@ -6,7 +6,7 @@ RELEASE=2
 CATEGORY="GNOME"
 SUMMARY="GNOME Desktop preferences manager"
 DESCRIPTION="GNOME Desktop preferences managers"
-REQUIRES="gnome-settings-daemon"
+REQUIRES="gnome-settings-daemon tzcode"
 
 PATCH_URI="
 	3.0.2-cygwin.patch
