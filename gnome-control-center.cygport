@@ -2,7 +2,7 @@ inherit gnome2
 
 NAME="gnome-control-center"
 VERSION=3.14.5
-RELEASE=1
+RELEASE=2
 CATEGORY="GNOME"
 SUMMARY="GNOME Desktop preferences manager"
 DESCRIPTION="GNOME Desktop preferences managers"
