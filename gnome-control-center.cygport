@@ -1,15 +1,17 @@
 inherit gnome2
 
 NAME="gnome-control-center"
-VERSION=3.18.1
+VERSION=3.22.2
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME Desktop preferences manager"
 DESCRIPTION="GNOME Desktop preferences managers"
 
 PATCH_URI="
-	3.14-exeext.patch
-	3.18-polkit-etc.patch
+	3.22-colord-polkit-upower.patch
+	3.22-exeext.patch
+	3.22-online-accounts-menu.patch
+	3.22-x11-no-wayland.patch
 "
 
 ACLOCAL_FLAGS="-I libgd"

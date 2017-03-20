@@ -1,0 +1,13 @@
+--- origsrc/gnome-control-center-3.22.1/panels/online-accounts/gnome-online-accounts-panel.desktop.in.in	2016-08-12 07:43:57.000000000 -0500
++++ src/gnome-control-center-3.22.1/panels/online-accounts/gnome-online-accounts-panel.desktop.in.in	2017-03-07 17:48:24.788612400 -0600
+@@ -6,10 +6,8 @@ Exec=gnome-control-center online-account
+ Icon=goa-panel
+ Terminal=false
+ Type=Application
+-NoDisplay=true
+ StartupNotify=true
+ Categories=GNOME;GTK;Settings;DesktopSettings;X-GNOME-Settings-Panel;X-GNOME-PersonalSettings;X-GNOME-AccountSettings;
+-OnlyShowIn=GNOME;Unity;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=gnome-control-center
+ X-GNOME-Bugzilla-Component=Online Accounts

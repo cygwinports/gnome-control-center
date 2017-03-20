@@ -1,0 +1,11 @@
+--- origsrc/gnome-control-center-3.22.1/shell/Makefile.am	2017-03-07 11:47:45.533162600 -0600
++++ src/gnome-control-center-3.22.1/shell/Makefile.am	2017-03-07 13:05:56.448209100 -0600
+@@ -164,7 +164,7 @@ EXTRA_DIST =					\
+ CLEANFILES = $(BUILT_SOURCES) $(completion_DATA) $(servicefile_DATA)
+ DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
+ 
+-TEST_PROGS += test-hostname
++TEST_PROGS += test-hostname$(EXEEXT)
+ noinst_PROGRAMS += test-hostname
+ test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
+ test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
