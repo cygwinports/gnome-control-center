@@ -1,6 +1,6 @@
---- origsrc/gnome-control-center-3.22.1/configure.ac	2016-10-11 06:58:37.000000000 -0500
-+++ src/gnome-control-center-3.22.1/configure.ac	2017-03-07 11:44:15.698398100 -0600
-@@ -118,41 +118,26 @@ LIBGD_INIT([_view-common notification st
+--- origsrc/gnome-control-center-3.24.3/configure.ac	2017-07-22 11:05:54.000000000 -0500
++++ src/gnome-control-center-3.24.3/configure.ac	2017-09-05 00:45:11.240856800 -0500
+@@ -119,42 +119,25 @@ LIBGD_INIT([_view-common static])
  
  PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
  PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
@@ -15,6 +15,7 @@
 -                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                    gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 -PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES gnome-desktop-3.0 >= 3.1.0
+-                  colord >= $COLORD_REQUIRED_VERSION
 -                  upower-glib >= 0.99.0)
 -PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0
 -		  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
@@ -22,7 +23,6 @@
  PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES
                    gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                    x11)
- PKG_CHECK_MODULES(MEDIA_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
                    gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
 -PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES gmodule-2.0
@@ -35,7 +35,8 @@
 -                  libsoup-2.4
 -                  gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 -PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
--                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+-                  smbclient)
  PKG_CHECK_MODULES(PRIVACY_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
 -                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
@@ -44,7 +45,7 @@
                    $IBUS_MODULE)
  PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(SEARCH_PANEL, $COMMON_MODULES)
-@@ -161,12 +146,6 @@ PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_M
+@@ -163,12 +146,6 @@ PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_M
                    libpulse >= $PA_REQUIRED_VERSION
                    libpulse-mainloop-glib >= $PA_REQUIRED_VERSION)
  PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES)
@@ -57,7 +58,7 @@
  PKG_CHECK_MODULES(SHARING_PANEL, $COMMON_MODULES)
  PKG_CHECK_MODULES(REMOTE_LOGIN_HELPER, glib-2.0 >= $GLIB_REQUIRED_VERSION gio-2.0)
  
-@@ -214,9 +193,6 @@ if test x${have_networkmanager} = xyes;
+@@ -248,9 +225,6 @@ if test x${have_networkmanager} = xyes;
    PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.99.0
                      libnm >= $NETWORK_MANAGER_REQUIRED_VERSION
                      gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
@@ -67,8 +68,27 @@
  fi
  
  # Check for gnome-bluetooth
---- origsrc/gnome-control-center-3.22.1/panels/Makefile.am	2013-01-25 08:42:18.000000000 -0600
-+++ src/gnome-control-center-3.22.1/panels/Makefile.am	2017-03-07 11:45:19.312711600 -0600
+@@ -271,9 +245,7 @@ AC_PROG_SED
+ 
+ AC_PATH_PROG(CUPS_CONFIG, cups-config)
+ 
+-if test x$CUPS_CONFIG = x; then
+-  AC_MSG_ERROR([cups-config not found])
+-fi
++if test x$CUPS_CONFIG != x; then
+ 
+ CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
+ CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
+@@ -296,6 +268,7 @@ fi
+ 
+ CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
+ CUPS_LIBS=`$CUPS_CONFIG --libs`
++fi
+ AC_SUBST(CUPS_CPPFLAGS)
+ AC_SUBST(CUPS_CFLAGS)
+ AC_SUBST(CUPS_LIBS)
+--- origsrc/gnome-control-center-3.24.3/panels/Makefile.am	2017-05-10 03:10:21.000000000 -0500
++++ src/gnome-control-center-3.24.3/panels/Makefile.am	2017-09-05 00:45:11.256480700 -0500
 @@ -1,9 +1,6 @@
  SUBDIRS= \
  	common \
@@ -79,7 +99,7 @@
  	mouse \
  	notifications \
  	online-accounts \
-@@ -12,8 +9,6 @@ SUBDIRS= \
+@@ -12,12 +9,10 @@ SUBDIRS= \
  	sound \
  	keyboard \
  	universal-access \
@@ -87,9 +107,14 @@
 -	datetime \
  	search \
  	privacy \
- 	sharing
---- origsrc/gnome-control-center-3.22.1/panels/region/cc-region-panel.c	2016-08-29 12:35:25.000000000 -0500
-+++ src/gnome-control-center-3.22.1/panels/region/cc-region-panel.c	2017-03-07 11:45:08.822091300 -0600
+ 	sharing \
+-	printers
++	$(NULL)
+ 
+ if BUILD_WACOM
+ SUBDIRS += wacom
+--- origsrc/gnome-control-center-3.24.3/panels/region/cc-region-panel.c	2017-07-22 10:19:48.000000000 -0500
++++ src/gnome-control-center-3.24.3/panels/region/cc-region-panel.c	2017-09-05 00:45:11.256480700 -0500
 @@ -45,7 +45,9 @@
  #include "cc-ibus-utils.h"
  #endif
@@ -98,9 +123,9 @@
  #include <act/act.h>
 +#endif
  
- #include <libgd/gd-notification.h>
- 
-@@ -97,8 +99,10 @@ struct _CcRegionPanelPrivate {
+ #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
+ #define KEY_INPUT_SOURCES        "sources"
+@@ -95,8 +97,10 @@ struct _CcRegionPanelPrivate {
          GtkListBoxRow *formats_row;
          GtkWidget     *formats_label;
  
@@ -111,7 +136,7 @@
          GSettings      *locale_settings;
  
          gchar *language;
-@@ -135,6 +139,7 @@ cc_region_panel_finalize (GObject *objec
+@@ -133,6 +137,7 @@ cc_region_panel_finalize (GObject *objec
          g_cancellable_cancel (priv->cancellable);
          g_clear_object (&priv->cancellable);
  
@@ -119,7 +144,7 @@
          if (priv->user_manager) {
                  g_signal_handlers_disconnect_by_data (priv->user_manager, self);
                  priv->user_manager = NULL;
-@@ -144,6 +149,7 @@ cc_region_panel_finalize (GObject *objec
+@@ -142,6 +147,7 @@ cc_region_panel_finalize (GObject *objec
                  g_signal_handlers_disconnect_by_data (priv->user, self);
                  priv->user = NULL;
          }
@@ -127,7 +152,7 @@
  
          g_clear_object (&priv->permission);
          g_clear_object (&priv->localed);
-@@ -376,7 +382,9 @@ update_language (CcRegionPanel *self,
+@@ -354,7 +360,9 @@ update_language (CcRegionPanel *self,
          } else {
                  if (g_strcmp0 (language, priv->language) == 0)
                          return;
@@ -137,7 +162,7 @@
                  if (priv->login_auto_apply)
                          set_system_language (self, language);
                  maybe_notify (self, LC_MESSAGES, language);
-@@ -634,8 +642,10 @@ update_language_from_user (CcRegionPanel
+@@ -612,8 +620,10 @@ update_language_from_user (CcRegionPanel
  	CcRegionPanelPrivate *priv = self->priv;
          const gchar *language = NULL;
  
@@ -148,7 +173,7 @@
  
          if (language == NULL || *language == '\0')
                  language = setlocale (LC_MESSAGES, NULL);
-@@ -651,11 +661,13 @@ setup_language_section (CcRegionPanel *s
+@@ -629,11 +639,13 @@ setup_language_section (CcRegionPanel *s
  	CcRegionPanelPrivate *priv = self->priv;
          GtkWidget *widget;
  
@@ -162,7 +187,7 @@
  
          priv->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
          g_signal_connect_swapped (priv->locale_settings, "changed::" KEY_REGION,
-@@ -1731,6 +1743,9 @@ login_changed (CcRegionPanel *self)
+@@ -1710,6 +1722,9 @@ login_changed (CcRegionPanel *self)
  static void
  set_login_button_visibility (CcRegionPanel *self)
  {
@@ -172,7 +197,7 @@
          CcRegionPanelPrivate *priv = self->priv;
          gboolean has_multiple_users;
          gboolean loaded;
-@@ -1745,6 +1760,7 @@ set_login_button_visibility (CcRegionPan
+@@ -1724,6 +1739,7 @@ set_login_button_visibility (CcRegionPan
          gtk_widget_set_visible (priv->login_button, !priv->login_auto_apply);
  
          g_signal_handlers_disconnect_by_func (priv->user_manager, set_login_button_visibility, self);
@@ -180,7 +205,7 @@
  }
  
  static void
-@@ -1785,12 +1801,14 @@ setup_login_button (CcRegionPanel *self)
+@@ -1764,12 +1780,14 @@ setup_login_button (CcRegionPanel *self)
          g_signal_connect_swapped (priv->login_button, "notify::active",
                                    G_CALLBACK (login_changed), self);
  
@@ -195,7 +220,7 @@
  }
  
  static void
-@@ -1834,7 +1852,9 @@ cc_region_panel_init (CcRegionPanel *sel
+@@ -1814,7 +1832,9 @@ cc_region_panel_init (CcRegionPanel *sel
  		return;
  	}
  
@@ -205,8 +230,8 @@
  
          priv->cancellable = g_cancellable_new ();
  
---- origsrc/gnome-control-center-3.22.1/polkit/polkit.h	1969-12-31 18:00:00.000000000 -0600
-+++ src/gnome-control-center-3.22.1/polkit/polkit.h	2017-03-07 11:45:08.828105900 -0600
+--- origsrc/gnome-control-center-3.24.3/polkit/polkit.h	1969-12-31 18:00:00.000000000 -0600
++++ src/gnome-control-center-3.24.3/polkit/polkit.h	2017-09-05 00:45:11.256480700 -0500
 @@ -0,0 +1,8 @@
 +#include <gio/gio.h>
 +
@@ -216,9 +241,9 @@
 +  g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED, "No polkit on Cygwin");
 +  return NULL;
 +}
---- origsrc/gnome-control-center-3.22.1/shell/Makefile.am	2016-08-12 07:43:57.000000000 -0500
-+++ src/gnome-control-center-3.22.1/shell/Makefile.am	2017-03-07 11:46:26.200346700 -0600
-@@ -78,22 +78,18 @@ gnome_control_center_LDADD =						\
+--- origsrc/gnome-control-center-3.24.3/shell/Makefile.am	2017-09-05 00:34:26.657623900 -0500
++++ src/gnome-control-center-3.24.3/shell/Makefile.am	2017-09-05 00:45:11.272105300 -0500
+@@ -78,23 +78,18 @@ gnome_control_center_LDADD =						\
  	$(top_builddir)/panels/common/liblanguage.la			\
  	$(top_builddir)/panels/common/libdevice.la			\
  	$(top_builddir)/panels/background/libbackground.la		\
@@ -237,13 +262,14 @@
  	$(top_builddir)/panels/sharing/libsharing.la			\
  	$(top_builddir)/panels/sound/libsound.la			\
  	$(top_builddir)/panels/universal-access/libuniversal-access.la	\
--	$(top_builddir)/panels/user-accounts/libuser-accounts.la
+-	$(top_builddir)/panels/user-accounts/libuser-accounts.la	\
+-	$(top_builddir)/panels/printers/libprinters.la
 +	$(NULL)
  
  if BUILD_WACOM
  gnome_control_center_LDADD += $(top_builddir)/panels/wacom/libwacom-properties.la
---- origsrc/gnome-control-center-3.22.1/shell/cc-panel-loader.c	2016-08-12 07:43:57.000000000 -0500
-+++ src/gnome-control-center-3.22.1/shell/cc-panel-loader.c	2017-03-07 11:45:08.841619900 -0600
+--- origsrc/gnome-control-center-3.24.3/shell/cc-panel-loader.c	2017-07-22 10:19:48.000000000 -0500
++++ src/gnome-control-center-3.24.3/shell/cc-panel-loader.c	2017-09-05 00:45:11.272105300 -0500
 @@ -33,9 +33,11 @@ extern GType cc_background_panel_get_typ
  #ifdef BUILD_BLUETOOTH
  extern GType cc_bluetooth_panel_get_type (void);
@@ -256,17 +282,17 @@
  extern GType cc_info_panel_get_type (void);
  extern GType cc_keyboard_panel_get_type (void);
  extern GType cc_mouse_panel_get_type (void);
-@@ -44,7 +46,9 @@ extern GType cc_network_panel_get_type (
+@@ -44,15 +46,19 @@ extern GType cc_network_panel_get_type (
  #endif /* BUILD_NETWORK */
  extern GType cc_notifications_panel_get_type (void);
  extern GType cc_goa_panel_get_type (void);
 +#ifndef __CYGWIN__
  extern GType cc_power_panel_get_type (void);
-+#endif
- #ifdef BUILD_PRINTERS
  extern GType cc_printers_panel_get_type (void);
- #endif /* BUILD_PRINTERS */
-@@ -54,7 +58,9 @@ extern GType cc_search_panel_get_type (v
++#endif
+ extern GType cc_privacy_panel_get_type (void);
+ extern GType cc_region_panel_get_type (void);
+ extern GType cc_search_panel_get_type (void);
  extern GType cc_sharing_panel_get_type (void);
  extern GType cc_sound_panel_get_type (void);
  extern GType cc_ua_panel_get_type (void);
@@ -276,7 +302,7 @@
  #ifdef BUILD_WACOM
  extern GType cc_wacom_panel_get_type (void);
  #endif /* BUILD_WACOM */
-@@ -77,9 +83,11 @@ static struct {
+@@ -75,9 +81,11 @@ static struct {
  #ifdef BUILD_BLUETOOTH
    PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type    ),
  #endif
@@ -288,17 +314,17 @@
    PANEL_TYPE("info",             cc_info_panel_get_type         ),
    PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type     ),
    PANEL_TYPE("mouse",            cc_mouse_panel_get_type        ),
-@@ -88,7 +96,9 @@ static struct {
+@@ -86,15 +94,19 @@ static struct {
  #endif
    PANEL_TYPE("notifications",    cc_notifications_panel_get_type),
    PANEL_TYPE("online-accounts",  cc_goa_panel_get_type          ),
 +#ifndef __CYGWIN__
    PANEL_TYPE("power",            cc_power_panel_get_type        ),
-+#endif
- #ifdef BUILD_PRINTERS
    PANEL_TYPE("printers",         cc_printers_panel_get_type     ),
- #endif
-@@ -98,7 +108,9 @@ static struct {
++#endif
+   PANEL_TYPE("privacy",          cc_privacy_panel_get_type      ),
+   PANEL_TYPE("region",           cc_region_panel_get_type       ),
+   PANEL_TYPE("search",           cc_search_panel_get_type       ),
    PANEL_TYPE("sharing",          cc_sharing_panel_get_type      ),
    PANEL_TYPE("sound",            cc_sound_panel_get_type        ),
    PANEL_TYPE("universal-access", cc_ua_panel_get_type           ),
