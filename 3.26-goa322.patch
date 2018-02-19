@@ -1,0 +1,42 @@
+Revert commit e63accbf827b2138ae99efcb2e6339321d55dbdb
+
+--- origsrc/gnome-control-center-3.26.2/configure.ac	2018-02-14 21:58:00.156129600 -0600
++++ src/gnome-control-center-3.26.2/configure.ac	2018-02-14 22:01:39.983177400 -0600
+@@ -101,7 +101,7 @@ GNOME_DESKTOP_REQUIRED_VERSION=3.21.2
+ SCHEMAS_REQUIRED_VERSION=3.21.4
+ LIBWACOM_REQUIRED_VERSION=0.7
+ CLUTTER_REQUIRED_VERSION=1.11.3
+-GOA_REQUIRED_VERSION=3.25.3
++GOA_REQUIRED_VERSION=3.21.5
+ ACCOUNTSSERVICE_REQUIRED_VERSION=0.6.39
+ COLORD_REQUIRED_VERSION=0.1.34
+ COLORD_GTK_REQUIRED_VERSION=0.1.24
+--- origsrc/gnome-control-center-3.26.2/panels/online-accounts/online-accounts.ui	2017-10-18 09:19:15.000000000 -0500
++++ src/gnome-control-center-3.26.2/panels/online-accounts/online-accounts.ui	2018-02-14 23:38:45.872554400 -0600
+@@ -242,7 +242,7 @@
+               <object class="GtkBox">
+                 <property name="visible">True</property>
+                 <property name="can_focus">False</property>
+-                <property name="margin-bottom">24</property>
++                <property name="margin">24</property>
+                 <property name="spacing">42</property>
+                 <property name="orientation">vertical</property>
+                 <child>
+@@ -251,14 +251,15 @@
+                     <property name="can_focus">False</property>
+                     <property name="vexpand">True</property>
+                     <property name="orientation">vertical</property>
++                    <property name="margin-start">18</property>
++                    <property name="margin-end">18</property>
++                    <property name="spacing">18</property>
+                   </object>
+                 </child>
+                 <child>
+                   <object class="GtkButton" id="remove_account_button">
+                     <property name="visible">True</property>
+                     <property name="can_focus">True</property>
+-                    <property name="margin-start">24</property>
+-                    <property name="margin-end">24</property>
+                     <property name="valign">end</property>
+                     <property name="halign">end</property>
+                     <property name="label" translatable="yes">Remove Account</property>

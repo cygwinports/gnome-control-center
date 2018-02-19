@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="gnome-control-center"
-VERSION=3.24.3
+VERSION=3.26.2
 RELEASE=1
 CATEGORY="GNOME"
 SUMMARY="GNOME Desktop preferences manager"
@@ -11,7 +11,10 @@ PATCH_URI="
 	3.24-colord-polkit-upower.patch
 	3.22-exeext.patch
 	3.22-online-accounts-menu.patch
+	3.26-goa322.patch
 "
+
+DIFF_EXCLUDES="cc-online-accounts-resources.c"
 
 ACLOCAL_FLAGS="-I libgd"
 CYGCONF_ARGS="--disable-cups --disable-update-mimedb"
